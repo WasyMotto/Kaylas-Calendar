@@ -1,26 +1,30 @@
-@import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
 
+/* your custom utilities here */
+/* Pink Theme Variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --pinkPrimary: #ff4fa3;
+  --pinkLight: #ffd6e8;
+  --pinkBackground: #fff3f8;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Soft rounded corners */
+.rounded-soft {
+  border-radius: 12px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Soft shadow */
+.shadow-soft {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Pink background utility */
+.bg-pinkBackground {
+  background-color: var(--pinkBackground);
+}
+
+/* Pink text utility */
+.text-pinkPrimary {
+  color: var(--pinkPrimary);
 }
