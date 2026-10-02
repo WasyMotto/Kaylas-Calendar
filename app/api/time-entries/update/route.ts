@@ -6,11 +6,9 @@ export async function POST(req: Request) {
     id,
     user_id,
     date,
-    start_time,
-    end_time,
-    hours_worked,
-    category,
-    notes
+    client_hours,
+    admin_hours,
+    notes,
   } = body;
 
   if (!id) {
@@ -20,14 +18,6 @@ export async function POST(req: Request) {
     );
   }
 
-  // Recompute hours if start/end provided
-  let computedHours = hours_worked;
-  if (start_time && end_time) {
-    const start = new Date(`1970-01-01T${start_time}:00`);
-    const end = new Date(`1970-01-01T${end_time}:00`);
-    computedHours = (end.getTime() - start.getTime()) / (1000 * 60 * 60);
-  }
-
   const supabase = supabaseServer();
 
   const { data, error } = await supabase
@@ -35,12 +25,9 @@ export async function POST(req: Request) {
     .update({
       user_id,
       date,
-      start_time,
-      end_time,
-      hours_worked: computedHours,
-      category,
+      client_hours,
+      admin_hours, 
       notes,
-      updated_at: new Date().toISOString()
     })
     .eq('id', id)
     .select();
